@@ -2,7 +2,7 @@ import java.util.*;
 
 public class solutions{
 	public static void main (String [] args){
-
+		// ***change input here***
 		String input = "exa-mple";
 		String rule_char_set = "ae";
 
@@ -23,18 +23,19 @@ public class solutions{
 	}
 
 	public ArrayList<String> enumerate (String input, String rule_char_set){
-		ArrayList<String> list = new ArrayList<String>();
+		ArrayList<String> list = new ArrayList<String>(); //solutions
 
-		//Parallel Array indicating if character is permutable as per ruleset.
+		//Parallel array indicating if character is permutable as per ruleset.
 		int[] perm_array = new int[input.length()];
 
 		for (int i = 0; i<input.length(); i++){
+			//For each character in the input
 			char in = input.charAt(i);
 			//If this char is found in the rule_char_set, it is permutable
 			for (int j = 0; j<rule_char_set.length(); j++){
 				if (in == rule_char_set.charAt(j)){
 					perm_array[i] = 1; //Set corresponding index to 1.
-					j = rule_char_set.length();
+					j = rule_char_set.length(); //Exit loop
 				}
 			}
 		}
@@ -44,6 +45,7 @@ public class solutions{
 		return list;
 	}
 
+	//Recursively finds every permutation
 	void findPermute(String input, int index, int[] toPerm, String current, ArrayList list){
 			if (index == input.length()){ //no more chars left, add to list
 				list.add(current);
@@ -63,12 +65,15 @@ public class solutions{
 	}
 
 	int[] findMedianSub(int[] a, int[] b, int alo, int ahi, int blo, int bhi){
+		//Calculate median of the two numbers
 		int medA = a[((ahi-alo)/2)+alo];
 		int medB = b[((bhi-blo)/2)+blo];
-
+		
+		//Base case 1: Same median for A and B
 		if (medA == medB){
 			int[] res = {medA,medB};
 			return res;
+		//Base case 2: two medians for A and B.
 		} else if ((ahi-alo) == 1 && (bhi-blo) == 1){
 			int min = a[alo];
 			int max = b[blo];
@@ -80,13 +85,10 @@ public class solutions{
 			}
 			int[] res = {min,max};
 			return res;
-
-		} else if (medA > medB){
+		} else if (medA > medB){ //If this is true, median MUST be in 1st 1/2 of A or 2nd 1/2 of B.
 			return findMedianSub(a,b, alo, (((ahi-alo)/2)+alo), (((bhi-blo)/2)+blo), bhi);
-		} else { //(medB > medA)
+		} else { //(medB > medA), median MUST be in 2nd 1/2 of A or 1st 1/2 of B.
 			return findMedianSub(a,b, (((ahi-alo)/2)+alo), ahi, blo, (((bhi-blo)/2)+blo));
 		}
-
 	}
-
 }
