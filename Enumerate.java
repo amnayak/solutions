@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class solutions{
+public class Enumerate{
 	public static void main (String [] args){
 		// ***change input here***
 		String input = "exa-mple";
@@ -9,7 +9,7 @@ public class solutions{
 		int[] a = {10, 20, 30, 40, 51, 61, 71};
 		int[] b = {15, 25, 31, 86, 600, 700, 900};
 
-		solutions s = new solutions();
+		Enumerate s = new Enumerate();
 
 		ArrayList<String> sols = s.enumerate(input, rule_char_set); //These are the solutions
 
